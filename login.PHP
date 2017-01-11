@@ -1,72 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="format-detection" content="telephone=no" />
-    <title>登录页面实例展示</title>
-    <style>
-        .mar_auto {
-            margin-right: auto;
-            margin-left: auto;
-        }
-        .re {
-            position: relative;
-        }
-        .mt70 {
-            margin-top: 70px;
-        }
-        .min_h400 {
-            min-height: 400px;
-        }
-        .w432 {
-            width: 432px;
-        }
-        .btn_1 {
-            display: inline-block;
+<?php
+/**
+ * Created by PhpStorm.
+ * User: nishishao
+ * Date: 2017/1/11
+ * Time: 21:07
+ */
 
-            line-height: 16px;
-            padding: 15px 0;
-            margin-bottom: 30px;
-            border-radius: 3px;
-            font-family: Microsoft YaHei,SimHei;
-            background: #03a9f4;
-            border: 1px solid #0398db;
-            color: #fff;
-            font-size: 20px;
-            text-align: center;
-            cursor: pointer;
-        }
-        .w430 {
-            width: 430px;
-        }
-        .pf_ipt_user, .pf_ipt_pass, .pf_ipt_verify{
-            height: 20px;
-            line-height: 20px;
-            padding: 13px 20px;
-            margin-bottom: 30px;
-            width: 390px;
-            border: 1px solid #d9d9d9;
-            border-radius: 3px;
-            color: #888;
-            font-size: 16px;
-            font-family: Microsoft YaHei,SimHei;
-        }
-        .w230{
-            width: 230px;
-        }
 
-    </style>
-</head>
-<body></div>
-<div class="mt70 w432 mar_auto re min_h400">
-    <form method="post" action="login.php">
-        <p><input type="text" class="pf_ipt_user" placeholder="请输入登录账号" autocomplete="off" name="username" id="_username" tabindex="1"/></p>
-        <p><input type="password" class="pf_ipt_pass pass_bg_1" placeholder="请输入密码" autocomplete="off" name="password" id="_password" tabindex="2"/></p>
-        <input type="submit" value="登录">
-        <p><a href="login-in.html">账号注册</a></p>
-    </form>
-</div>
+//var_dump($_SERVER);die;
 
-</body>
-</html>
+$method = $_SERVER['REQUEST_METHOD'];
+//get请求
+if ($method == 'GET'){
+
+    require_once 'views/login.php';
+
+    //post 请求 接受数据并且处理数据
+}elseif ($method == 'POST'){
+
+    //数据验证
+    $verify = false;
+    $username = null;
+    $password = null;
+
+    if (isset($_POST['username'])){
+        $username = $_POST['username'];
+    }
+
+    if (isset($_POST['password'])){
+        $password = $_POST['password'];
+    }
+
+    if (is_null($username)){
+        exit("<script>alert('用户名不能为空')</script>");
+    }
+
+    $usernameLength = strlen($username);
+
+    if($usernameLength < 6 || $usernameLength > 20){
+        exit("用户名不能少于6个字符且不能多于20字符");
+    }
+
+    if (is_null($password)){
+        exit("<script>alert('密码不能为空')</script>");
+    }
+
+    $passwordLength = strlen($password);
+
+    if ($passwordLength<6 || $passwordLength > 20){
+        exit("密码不能少于6个字符且不能多于20字符");
+    }
+
+
+    include_once "vendor/autoload.php";
+
+    $config = new \Doctrine\DBAL\Configuration();
+
+    $pa = [
+        'dbname' => 'hello',
+        'user' => 'root',
+        'password' => 'root',
+        'host' => '192.168.1.105',
+        'driver' => 'mysqli',
+    ];
+
+    $conn = \Doctrine\DBAL\DriverManager::getConnection($pa,$config);
+
+    $sql = "select * from user where username='{$username}' AND password = '{$password}'";
+
+    $result = $conn->fetchAll($sql);
+
+    if (empty($result)){
+        exit("<script>alert('用户不存在，请检查用户名或密码是否正确');location.href = 'login.php';</script>");
+    }
+
+
+
+
+
+}else{
+    exit('非法请求');
+}
+
+
+
+

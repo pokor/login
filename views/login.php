@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no" />
-    <title>登录页面展示</title>
+    <title>登录页面实例展示</title>
     <style>
         .mar_auto {
             margin-right: auto;
@@ -24,6 +24,7 @@
         }
         .btn_1 {
             display: inline-block;
+
             line-height: 16px;
             padding: 15px 0;
             margin-bottom: 30px;
@@ -57,14 +58,15 @@
 
     </style>
 </head>
-<body>
+<body></div>
 <div class="mt70 w432 mar_auto re min_h400">
     <form method="post" action="login.php">
         <p><input type="text" class="pf_ipt_user" placeholder="请输入登录账号" autocomplete="off" name="username" id="_username" tabindex="1"/></p>
         <p><input type="password" class="pf_ipt_pass pass_bg_1" placeholder="请输入密码" autocomplete="off" name="password" id="_password" tabindex="2"/></p>
-        <button><a href="javascript:void(0)" onclick="login();" class="btn_1 w430">登录</a></button>
-        <a href="login-in.html" onclick="login();" class="btn_1 w430">注册</a>
+        <input type="submit" value="登录">
+        <p><a href="login-in.html">账号注册</a></p>
     </form>
 </div>
+
 </body>
 </html>
