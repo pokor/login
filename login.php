@@ -9,6 +9,8 @@
 
 //var_dump($_SERVER);die;
 
+session_start();
+
 $method = $_SERVER['REQUEST_METHOD'];
 //get请求
 if ($method == 'GET'){
@@ -66,7 +68,11 @@ if ($method == 'GET'){
 
     $conn = \Doctrine\DBAL\DriverManager::getConnection($pa,$config);
 
+    $password = md5($password);
+
     $sql = "select * from user where username='{$username}' AND password = '{$password}'";
+
+//    var_dump($sql);die;
 
     $result = $conn->fetchAll($sql);
 
@@ -74,9 +80,13 @@ if ($method == 'GET'){
         exit("<script>alert('用户不存在，请检查用户名或密码是否正确');location.href = 'login.php';</script>");
     }
 
+    $_SESSION['loginInfo'] = [];
+
+    $_SESSION ['loginInfo']['id'] = $result[0]['id'];
+    $_SESSION ['loginInfo']['username'] = $result[0]['username'];
 
 
-
+    exit("<script>alert('登录成功');location.href = 'home.php';</script>");
 
 }else{
     exit('非法请求');

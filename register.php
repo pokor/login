@@ -106,7 +106,7 @@ if(isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['pass
 }*/
 $method = $_SERVER['REQUEST_METHOD'];
 if ($method == 'GET'){
-    require_once 'register.php';
+    require_once 'views/register.php';
 
 }elseif ($method == 'POST'){
     $verify = false;
@@ -119,42 +119,46 @@ if ($method == 'GET'){
     if (isset($_POST['password'])){
         $password = $_POST['password'];
     }
-    if (isset($_POST['pwd-again'])){
-        $pasd = $_POST['pwd-again'];
+    if (isset($_POST['pwd_again'])){
+        $pasd = $_POST['pwd_again'];
     }
-    if ($password == $pasd){
-        if(strlen($username)<6 || strlen($username)>18){
 
-        }else{
+//    var_dump($_POST);die;
+    if ($password == $pasd){
+        $usernameLength = strlen($username);
+        if($usernameLength<6 || $usernameLength>18){
             echo "<script>alert('用户名不能小于6位数或者大于18位')</script>";
             echo "<a href='register.php'>返回</a>";
+            die();
         }
-        if(strlen($password)< 6 || strlen($password)>18){
-
-                $data = [];
-                $data['username'] = trim($username);
-                $data['password'] = md5(trim($password));
-                $par = [
-                    'dbname' => 'hello',
-                    'user' => 'root',
-                    'password' => 'root',
-                    'host' => 'localhost',
-                    'driver' => 'mysqli',
-                ];
-                $conn = \Doctrine\DBAL\DriverManager::getConnection($par,$config);
-                $res = $conn->insert('user',$conn);
-                if($res>0){
-                    echo"注册成功!"."<br/><br/>";
-                    echo"<a href='views/login.php'>立刻登录</a>";
-                    die();
-                }else{
-                    echo"注册不成功！"."<br/><br/>";
-                    echo "<a href='views/register.php'>返回</a>";
-                    die();
-                }
-
-        }else{
+        $passwordLength = strlen($password);
+        if($passwordLength< 6 || $passwordLength>18){
             echo "<script>alert('密码不能小于6位或小于18位');location.href = 'register.php'</script>";
+            die();
+        }
+        $data = [];
+        $data['username'] = trim($username);
+        $data['password'] = md5(trim($password));
+        $par = [
+            'dbname' => 'hello',
+            'user' => 'root',
+            'password' => 'root',
+            'host' => '192.168.1.105',
+            'driver' => 'mysqli',
+        ];
+        include_once "vendor/autoload.php";
+
+        $config = new \Doctrine\DBAL\Configuration();
+        $conn = \Doctrine\DBAL\DriverManager::getConnection($par,$config);
+        $res = $conn->insert('user',$data);
+        if($res>0){
+            echo"注册成功!"."<br/><br/>";
+            echo"<a href='login.php'>立刻登录</a>";
+            die();
+        }else{
+            echo"注册不成功！"."<br/><br/>";
+            echo "<a href='register.php'>返回</a>";
+            die();
         }
     }else{
         exit("<script>alert('两次密码不一致，请重新输入');location.href = 'register.php';</script>");
