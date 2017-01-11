@@ -86,21 +86,21 @@ if(isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['pass
                     die();
                 }else{
                     echo"注册不成功！"."<br/><br/>";
-                    echo"<a href='login-in.html'>返回</a>";
+                    echo "<a href='login-in.html'>返回</a>";
                     die();
                 }
             }
         }else{
             echo "<script>alert('密码不能小于6位或小于18位')</script>";
-            echo"<a href='login-in.html'>返回</a>";
+            echo "<a href='login-in.html'>返回</a>";
         }
     }else{
         echo "<script>alert('用户名不能小于6位数或者大于18位')</script>";
-        echo"<a href='login-in.html'>返回</a>";
+        echo "<a href='login-in.html'>返回</a>";
     }
 
 }else{
     echo "<script>alert(\"请确认信息完整性\")</script>";
-    echo"<a href='login-in.html'>返回</a>";
+    echo "<a href='login-in.html'>返回</a>";
 
 }
