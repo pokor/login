@@ -127,7 +127,7 @@ if ($method == 'GET'){
 
         }else{
             echo "<script>alert('用户名不能小于6位数或者大于18位')</script>";
-            echo "<a href='views/register.php'>返回</a>";
+            echo "<a href='register.php'>返回</a>";
         }
         if(strlen($password)< 6 || strlen($password)>18){
 
@@ -154,9 +154,9 @@ if ($method == 'GET'){
                 }
 
         }else{
-            echo "<script>alert('密码不能小于6位或小于18位');location.href = 'view/register.php'</script>";
+            echo "<script>alert('密码不能小于6位或小于18位');location.href = 'register.php'</script>";
         }
     }else{
-        exit("<script>alert('两次密码不一致，请重新输入');location.href = 'view/register.php';</script>");
+        exit("<script>alert('两次密码不一致，请重新输入');location.href = 'register.php';</script>");
     }
 }
