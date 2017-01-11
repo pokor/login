@@ -106,7 +106,7 @@ if(isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['pass
 }*/
 $method = $_SERVER['REQUEST_METHOD'];
 if ($method == 'GET'){
-    require_once 'views/login.php';
+    require_once 'register.php';
 
 }elseif ($method == 'POST'){
     $verify = false;
