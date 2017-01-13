@@ -76,7 +76,7 @@ if ($method == 'GET'){
 
     $result = $conn->fetchAll($sql);
     if($result !=''){
-        echo
+
     }
 
     if (empty($result)){
