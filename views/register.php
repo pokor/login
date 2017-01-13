@@ -59,7 +59,7 @@
 </head>
 <body>
 <div class="mt70 w432 mar_auto re min_h400">
-    <form name="form1" id="form1" method="post" action="">
+    <form name="form1" id="form1" method="post" action="./register.php">
         <p><input type="text" class="pf_ipt_user" placeholder="请输入账号" autocomplete="off" name="username" id="_username" tabindex="1"/></p>
         <p><input type="password" class="pf_ipt_pass pass_bg_1" placeholder="请输入密码" autocomplete="off" maxlength="16" minlength="6" name="password" id="_password" tabindex="2"/></p>
         <p><input type="password" class="pf_ipt_pass pass_bg_1" placeholder="请再输入一次" autocomplete="off" name="pwd_again" id="_password1" tabindex="3"/></p>

@@ -75,6 +75,9 @@ if ($method == 'GET'){
 //    var_dump($sql);die;
 
     $result = $conn->fetchAll($sql);
+    if($result !=''){
+        echo
+    }
 
     if (empty($result)){
         exit("<script>alert('用户不存在，请检查用户名或密码是否正确');location.href = 'login.php';</script>");
