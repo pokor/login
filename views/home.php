@@ -18,7 +18,6 @@
 <script>
     var id = '<?php echo  $_SESSION['loginInfo']['id'] ?>';
 
-
     alert(id);
 </script>
 </body>
